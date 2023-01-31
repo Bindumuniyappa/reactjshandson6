@@ -9,27 +9,12 @@ function EditPage() {
    const navigate = useNavigate();
    const index = (location.state.data);
 
-//    useEffect(() => {
-//      return () => {
-//         context.updateFunction(
-//             (prevObj)=>{
-//                 prevObj[index-1] = newObj;
-//                 return (prevObj)
-//             }
-//            );
-//      }
-//    },[context])
-   
-    // array of objects : context.entries
-    // function         : context.updateFunction
-
-
     // the object in which the changes will be done 
     const newObj = {
-        Name : context.entries[index].Name,
-        Age : context.entries[index].Age,
-        Course : context.entries[index].Batch,
-        Batch : context.entries[index].Age
+        name : context.entries[index].name,
+        age : context.entries[index].age,
+        course : context.entries[index].course,
+        batch : context.entries[index].batch
         
     }
 
@@ -47,16 +32,17 @@ function EditPage() {
             return (prevObj)
         }
        );
-       navigate('/');
+       navigate('/student');
     }
-
-
    return (
     <>
-        <input onChange={handleChange} name='Name' placeholder= {context.entries[index].Name}></input>
-        <input onChange={handleChange} name='Age'   placeholder= {context.entries[index].Age}></input>
+        <input onChange={handleChange} name='name' placeholder= {context.entries[index].name} className='inputCon'></input>
+        <input onChange={handleChange} name='age'  placeholder= {context.entries[index].age} className='inputCon'></input>
+        <input onChange={handleChange} name='course'  placeholder= {context.entries[index].course} className='inputCon'></input>
+        <input onChange={handleChange} name='batch'  placeholder= {context.entries[index].batch} className='inputCon'></input>
         <br/>
-        <button onClick={handleUpdate}>Update</button>
+        <br/>
+        <button onClick={handleUpdate} id='update_btn'>Update</button>
     </>
   )
 }

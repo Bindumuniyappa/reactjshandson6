@@ -2,41 +2,44 @@ import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ContactUsePage from './ContactUsePage';
 import HomePage from './HomePage';
-import TablePage from './TablePage';
 import DataContext from './DataContext';
-import EditPage from './EditPage';
 import AddNewStudentPage from './AddNewStudentPage';
+import StudentPage from './StudentPage';
 
 function RoutingPage() {
-    const [data, setData] = useState([{ Name: 'john', Age: 26 ,Course:'MERN',Batch:'october',Change:''},
-{ Name: 'Doe', Age: 25 ,Course:'MERN',Batch:'November',Change:''}, 
-{ Name: 'Biden', Age: 26 ,Course:'MERN',Batch:'September',Change:''},
-{ Name: 'Barar', Age: 22 ,Course:'MERN',Batch:'September',Change:''},
-{ Name: 'Christ', Age: 23 ,Course:'MERN',Batch:'october',Change:''},
-{ Name: 'Elent', Age: 24 ,Course:'MERN',Batch:'November',Change:''}]);
+    const [data, setData] = useState([]);
+
+    const dispatchUserEvent=(actionType,payload)=>{
+      switch(actionType){
+        case 'ADD_USER':
+          setData([...data,payload.newUser]);
+          return;
+        case 'EDIT_USER':
+          setData(payload.newuser);
+          return;
+        default:
+          return;
+      }
+    };
   return (
     <>
   <Routes>
 
     <Route path='/' element={<HomePage/>}/>
-    <Route path='tablepage' element={<DataContext.Provider value={{entries : data, updateFunction : setData}}>
-            <TablePage/>
+    <Route path='/addnewstudent' element={<DataContext.Provider value={{entries : data, dispatchUserEvent}}>
+            <AddNewStudentPage/>
          </DataContext.Provider>
       }/>
-
-    <Route path='editpage' element={<EditPage/>}/>
-    {/* <Route path='editpage' element={<DataContext.Provider value={{entries : data, updateFunction : setData}}>
-          <EditPage/>
-        </DataContext.Provider>}/> */}
-    <Route path='addnewstudent' element={<AddNewStudentPage/>}/>
-    <Route path='contactusepage' element={<ContactUsePage/>}/>
-
-    {/* <Route path='/addStudent' element={
-        <DataContext.Provider value={{entries : data, updateFunction : setData}}>
-          <EditPage/>
-        </DataContext.Provider>
-      }/> */}
-       
+      <Route path='contactuspage' element={<ContactUsePage/>}/>
+      
+      <Route path='/student' element={<DataContext.Provider value={{entries : data, dispatchUserEvent}}>
+            <StudentPage/>
+         </DataContext.Provider>
+      }/>
+      <Route path='/student/:id' element={<DataContext.Provider value={{entries : data, dispatchUserEvent}}>
+            <StudentPage/>
+         </DataContext.Provider>
+      }/>
     </Routes>
     </>
   )

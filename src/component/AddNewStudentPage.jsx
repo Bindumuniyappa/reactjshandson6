@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import TablePage from './TablePage'
+import { Link } from 'react-router-dom'
+import DataContext from './DataContext';
 
 const AddNewStudentPage = () => {
+const context=useContext(DataContext)
+
   return (
     <div>
-        <input type='text' placeholder='Name' name="name" className='inputCon'/>
-        <input type='number' placeholder='Age'name="age" className='inputCon'/>
-        <br/>
-        <br/>
-        <input type='text' placeholder='Course' name="course" className='inputCon'/>
-        <input type='text' placeholder='Batch' name="batch" className='inputCon'/>
-        <br/>
-        <br/>
-        <br/>
-        <button  className='btn_btn'>Cancel</button>
-        <button className='btn_btn'>Submit</button>
+      <div style={{fontSize:'30px',marginTop:'30px'}}>Student Details</div>
+      <div>
+        <Link to='/student'><button id='addButton'>Add New student</button></Link></div>
+
+      <div>
+        {context.entries.length ? <TablePage/>:''}
+      </div>
     </div>
   )
 }

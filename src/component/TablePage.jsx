@@ -3,19 +3,17 @@ import { Link } from 'react-router-dom';
 import DataContext from './DataContext';
 
 
-const handleAdd = ()=>
-{
-    console.log("Add called")
-}
+// const handleAdd = ()=>
+// {
+//     console.log("Add called")
+// }
 
 function TablePage() {
   const context = useContext(DataContext);
   // context is the value that we have provided
-  console.log(context);
+  // console.log(context);
   return (
     <>
-    <div style={{fontSize:'30px',marginTop:'30px'}}>Student Details</div>
-    <Link to='/addnewstudent'><button onClick={handleAdd} id='addButton'>Add New student</button></Link>
     <table border={1} width='80%' cellPadding={10} id='tableDesign'>
       <thead>
         <tr>
@@ -31,16 +29,14 @@ function TablePage() {
         context.entries.map((item,index) => (
           // each item is an object
             <tr key={index}>
-            <td>{item.Name}</td>
-            <td>{item.Age}</td>
-            <td>{item.Course}</td>
-            <td>{item.Batch}</td>
-            <td>{item.Change}<Link to='/editpage' state={{data:index}}>
-                    Edit
-                </Link>
+            <td>{item.name}</td>
+            <td>{item.age}</td>
+            <td>{item.course}</td>
+            <td>{item.batch}</td>
+            <td>{item.Change}<Link to={`/student/${index+1}`} state={{details:item,id:index}}>Edit</Link>
             </td>
             
-              {/* Pass the ID of the row to fetch the data in the edit compoennt */}
+              {/* Pass the ID of the row to fetch the data in the edit component */}
                 {/* <Link to='/editpage' state={{data:item.id}}>
                     Edit
                 </Link>  */}

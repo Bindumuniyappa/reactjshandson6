@@ -63,3 +63,9 @@ nav ul li a {
   margin-top: 50px;
   background-color: white;
 }
+
+#update_btn{
+  font-size: 25px;
+    border-radius: 10px;
+  margin-left: 650px;
+}
